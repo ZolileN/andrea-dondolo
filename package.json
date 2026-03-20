@@ -15,7 +15,7 @@
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^3.99.0",
     "groq": "^5.17.1",
-    "next": "14.2.15",
+    "next": "14.2.35",
     "next-sanity": "^9.12.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

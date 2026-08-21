@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getWorkBySlug, getWorkSlugs } from '@/lib/sanity/fetchers'
+import { getWorkBySlug, getWorkSlugs, getRelatedWork } from '@/lib/sanity/fetchers'
+import { isFallbackWork } from '@/lib/content/get-works'
 import { urlFor } from '@/lib/sanity/image'
 import Container from '@/components/layout/container'
 import PortableTextRenderer from '@/components/portable-text/portable-text-renderer'
@@ -28,14 +29,19 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
   const work = await getWorkBySlug(slug)
   if (!work) notFound()
 
+  const relatedWork = await getRelatedWork(work, slug)
+  const heroSrc = work.heroImage
+    ? urlFor(work.heroImage).width(1600).height(686).url()
+    : work.heroImagePath ?? null
+
   return (
     <>
       {/* Hero */}
       <section style={{ paddingTop: 72, position: 'relative', overflow: 'hidden' }}>
         <div style={{ width: '100%', aspectRatio: '21/9', background: 'var(--dark-brown)', position: 'relative', minHeight: 400 }}>
-          {work.heroImage && (
+          {heroSrc && (
             <Image
-              src={urlFor(work.heroImage).width(1600).height(686).url()}
+              src={heroSrc}
               alt={work.title} fill sizes="100vw"
               style={{ objectFit: 'cover', opacity: 0.6 }}
               priority
@@ -68,7 +74,11 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                   {work.excerpt}
                 </p>
               )}
-              {work.body && <PortableTextRenderer value={work.body} />}
+              {work.body ? <PortableTextRenderer value={work.body} /> : isFallbackWork(work) ? (
+                <p style={{ fontSize: 15, lineHeight: 1.9, color: 'rgba(245,240,232,0.62)' }}>
+                  {work.excerpt}
+                </p>
+              ) : null}
             </div>
             <div>
               {(work.credits?.length || work.externalLinks?.length) ? (
@@ -120,12 +130,12 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
       ) : null}
 
       {/* Related work */}
-      {work.relatedWork?.length ? (
+      {relatedWork.length ? (
         <section style={{ padding: '60px 0 100px', borderTop: '0.5px solid rgba(245,240,232,0.08)' }}>
           <Container>
             <p className="section-label">Related Work</p>
             <div className="work-grid" style={{ marginTop: 32 }}>
-              {work.relatedWork.map((w) => <WorkCardComponent key={w._id} work={w} />)}
+              {relatedWork.map((w) => <WorkCardComponent key={w._id} work={w} />)}
             </div>
           </Container>
         </section>

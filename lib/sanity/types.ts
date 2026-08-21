@@ -41,6 +41,7 @@ export interface WorkCard {
   excerpt?: string
   roleLabel?: string
   heroImage?: SanityImage
+  heroImagePath?: string
   category?: WorkCategory
   featured?: boolean
 }

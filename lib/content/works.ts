@@ -25,7 +25,7 @@ export const FALLBACK_WORKS: FallbackWork[] = [
     platform: 'SABC2',
     category: television,
     featured: true,
-    heroImagePath: '/images/work/stokvel.png',
+    heroImagePath: '/images/work/stokvel.jpg',
     excerpt:
       'Andrea\'s signature role as Ayanda Twala — a township tourism operator and Lerata\'s best friend — in one of South Africa\'s most beloved sitcoms.',
     credits: [
@@ -55,7 +55,7 @@ export const FALLBACK_WORKS: FallbackWork[] = [
     platform: 'SABC1',
     category: television,
     featured: true,
-    heroImagePath: '/images/work/home-affairs.png',
+    heroImagePath: '/images/work/home-affairs.jpg',
     excerpt:
       'A South African drama following nine interconnected women whose lives cross paths through love, loss, and identity.',
     credits: [
@@ -83,7 +83,7 @@ export const FALLBACK_WORKS: FallbackWork[] = [
     platform: 'Mzansi Magic',
     category: television,
     featured: true,
-    heroImagePath: '/images/work/the-queen.png',
+    heroImagePath: '/images/work/the-queen.jpg',
     excerpt:
       'South African telenovela from Ferguson Films about power, family secrets, and survival in the world of the Khoza empire.',
     credits: [
@@ -111,7 +111,7 @@ export const FALLBACK_WORKS: FallbackWork[] = [
     platform: 'SABC1',
     category: television,
     featured: true,
-    heroImagePath: '/images/work/when-we-were-black.png',
+    heroImagePath: '/images/work/when-we-were-black.jpg',
     excerpt:
       'A drama series set against the backdrop of the 1980s, exploring the lives of young South Africans during a pivotal era.',
     credits: [
@@ -138,7 +138,7 @@ export const FALLBACK_WORKS: FallbackWork[] = [
     platform: 'e.tv',
     category: television,
     featured: false,
-    heroImagePath: '/images/work/traffic.png',
+    heroImagePath: '/images/work/traffic.jpg',
     excerpt:
       'A crime thriller series following the intersecting lives of people caught in Johannesburg\'s underworld.',
     credits: [
@@ -166,7 +166,7 @@ export const FALLBACK_WORKS: FallbackWork[] = [
     platform: 'e.tv',
     category: television,
     featured: false,
-    heroImagePath: '/images/work/gold-diggers.png',
+    heroImagePath: '/images/work/gold-diggers.jpg',
     excerpt:
       'A drama series set in the world of illegal mining, exploring ambition, survival, and community in the mining belt.',
     credits: [
@@ -277,7 +277,7 @@ export const FALLBACK_WORKS: FallbackWork[] = [
     platform: 'Universal Pictures',
     category: film,
     featured: false,
-    heroImagePath: '/images/work/honey-3.jpeg',
+    heroImagePath: '/images/work/honey-3.jpg',
     excerpt:
       'Dance film in the Honey franchise, released in South Africa and internationally in 2016.',
     credits: [

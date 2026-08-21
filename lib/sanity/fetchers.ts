@@ -1,3 +1,10 @@
+import {
+  resolveRelatedWork,
+  resolveWorkBySlug,
+  resolveWorkCategories,
+  resolveWorkList,
+  resolveWorkSlugs,
+} from '@/lib/content/get-works'
 import { client } from './client'
 import {
   siteSettingsQuery, homepageQuery, aboutPageQuery, contactPageQuery,
@@ -46,20 +53,27 @@ export async function getContactPage(): Promise<ContactPageData | null> {
 }
 
 export async function getWorkList(): Promise<WorkCard[]> {
-  return (await safeFetch<WorkCard[]>(workListQuery)) ?? []
+  const items = (await safeFetch<WorkCard[]>(workListQuery)) ?? []
+  return resolveWorkList(items)
 }
 
 export async function getWorkCategories(): Promise<WorkCategory[]> {
-  return (await safeFetch<WorkCategory[]>(workCategoriesQuery)) ?? []
+  const items = (await safeFetch<WorkCategory[]>(workCategoriesQuery)) ?? []
+  return resolveWorkCategories(items)
 }
 
 export async function getWorkBySlug(slug: string): Promise<Work | null> {
-  return safeFetch(workBySlugQuery, { slug })
+  const cmsWork = await safeFetch<Work>(workBySlugQuery, { slug })
+  return resolveWorkBySlug(cmsWork, slug)
 }
 
 export async function getWorkSlugs(): Promise<{ slug: string }[]> {
-  const items = await getWorkList()
-  return items.map((w) => ({ slug: w.slug.current }))
+  const items = (await safeFetch<WorkCard[]>(workListQuery)) ?? []
+  return resolveWorkSlugs(items)
+}
+
+export async function getRelatedWork(work: Work, slug: string): Promise<WorkCard[]> {
+  return resolveRelatedWork(work, slug)
 }
 
 export async function getServicesList(): Promise<ServiceCard[]> {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getHomepage, getSiteSettings, getWorkList, getWorkCategories, getServicesList, getBooksList, getPressList, getTestimonials } from '@/lib/sanity/fetchers'
+import { resolveFeaturedWork } from '@/lib/content/get-works'
 import { urlFor } from '@/lib/sanity/image'
 import Container from '@/components/layout/container'
 import WorkCardComponent from '@/components/cards/work-card'
@@ -40,7 +41,7 @@ export default async function HomePage() {
     getTestimonials(),
   ])
 
-  const featuredWork = page?.featuredWork?.length ? page.featuredWork : works.filter((w) => w.featured).slice(0, 6)
+  const featuredWork = resolveFeaturedWork(page?.featuredWork, works)
   const displayServices = page?.featuredServices?.length ? page.featuredServices : services.slice(0, 3)
   const displayPress = page?.featuredPress?.length ? page.featuredPress : press.slice(0, 3)
   const displayTestimonials = page?.testimonialItems?.length ? page.testimonialItems : testimonials.slice(0, 3)

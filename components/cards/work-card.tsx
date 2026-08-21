@@ -8,6 +8,10 @@ interface WorkCardProps {
 }
 
 export default function WorkCardComponent({ work }: WorkCardProps) {
+  const imageSrc = work.heroImage
+    ? urlFor(work.heroImage).width(600).height(800).url()
+    : work.heroImagePath ?? null
+
   return (
     <Link
       href={`/work/${work.slug.current}`}
@@ -15,9 +19,9 @@ export default function WorkCardComponent({ work }: WorkCardProps) {
       style={{ display: 'block', textDecoration: 'none' }}
     >
       <div className="work-item-bg" style={{ background: 'var(--mid-brown)' }}>
-        {work.heroImage ? (
+        {imageSrc ? (
           <Image
-            src={urlFor(work.heroImage).width(600).height(800).url()}
+            src={imageSrc}
             alt={work.title}
             fill
             sizes="(max-width: 768px) 50vw, 33vw"
